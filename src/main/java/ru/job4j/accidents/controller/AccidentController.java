@@ -20,7 +20,7 @@ public class AccidentController {
         return "createAccident";
     }
 
-    @PostMapping("/saveAccident")
+    @PostMapping({"/saveAccident", "/updateAccident"})
     public String save(@ModelAttribute Accident accident) {
         accidents.create(accident);
         return "redirect:/#";

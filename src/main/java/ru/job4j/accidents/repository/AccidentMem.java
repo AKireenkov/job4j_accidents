@@ -39,7 +39,7 @@ public class AccidentMem {
         if (id == nextId.get()) {
             accident.setId(id);
         }
-        accidents.putIfAbsent(accident.getId(), accident);
+        accidents.put(accident.getId(), accident);
         return accident;
     }
 }
