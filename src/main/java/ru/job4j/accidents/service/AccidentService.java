@@ -7,8 +7,7 @@ import ru.job4j.accidents.repository.AccidentMem;
 import ru.job4j.accidents.repository.TypeMem;
 
 import java.util.Collection;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -17,26 +16,11 @@ public class AccidentService {
 
     private TypeMem typeMem;
 
-    private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>() {
-        {
-            put(1, new Accident(1,
-                    "Парковка в неположеном месте",
-                    "Припарковался на газоне",
-                    "Ул. Московская д.1",
-                    typeMem.findAllTypes().get(0)));
-            put(2, new Accident(2,
-                    "Превышение скорости",
-                    "Превышение от 20 до 40 км/ч",
-                    "Ул. Демидова д.26",
-                    typeMem.findAllTypes().get(2)));
-        }
-    };
-
     public Collection<Accident> findAll() {
         return accidentMem.findAll();
     }
 
-    public Accident findById(int id) {
+    public Optional<Accident> findById(int id) {
         return accidentMem.findById(id);
     }
 

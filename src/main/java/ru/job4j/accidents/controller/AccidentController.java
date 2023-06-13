@@ -8,6 +8,8 @@ import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.service.AccidentService;
 import ru.job4j.accidents.service.TypeService;
 
+import java.util.Optional;
+
 @AllArgsConstructor
 @Controller
 public class AccidentController {
@@ -30,7 +32,12 @@ public class AccidentController {
 
     @GetMapping("/editAccident/{id}")
     public String viewEditAccident(Model model, @PathVariable int id) {
-        model.addAttribute("accident", accidents.findById(id));
+        Optional<Accident> accident = accidents.findById(id);
+        if (accident.isEmpty()) {
+            model.addAttribute("message", "Не удалось найти инцедент");
+            return "errors/404";
+        }
+        model.addAttribute("accident", accident.get());
         model.addAttribute("types", typeService.findAllTypes());
         model.addAttribute("user", "Andrey Kireenkov");
         return "editAccident";
