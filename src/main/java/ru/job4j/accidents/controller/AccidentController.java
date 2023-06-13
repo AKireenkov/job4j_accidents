@@ -24,9 +24,15 @@ public class AccidentController {
         return "createAccident";
     }
 
-    @PostMapping({"/saveAccident", "/updateAccident"})
+    @PostMapping("/saveAccident")
     public String save(@ModelAttribute Accident accident, @RequestParam(value = "type.id") int typeId) {
         accidents.create(accident, typeId);
+        return "redirect:/#";
+    }
+
+    @PostMapping("/updateAccident")
+    public String update(@ModelAttribute Accident accident, @RequestParam(value = "type.id") int typeId) {
+        accidents.update(accident, typeId);
         return "redirect:/#";
     }
 

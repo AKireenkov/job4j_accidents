@@ -28,4 +28,9 @@ public class AccidentService {
         accident.setType(typeMem.findById(typeId));
         return accidentMem.create(accident);
     }
+
+    public boolean update(Accident accident, int typeId) {
+        accident.setType(typeMem.findById(typeId));
+        return accidentMem.update(accident);
+    }
 }

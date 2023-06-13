@@ -43,4 +43,10 @@ public class AccidentMem {
         accidents.put(accident.getId(), accident);
         return accident;
     }
+
+    public boolean update(Accident accident) {
+        return accidents.computeIfPresent(accident.getId(), (id, oldAccident) -> new Accident(
+                oldAccident.getId(), accident.getName(),
+                accident.getAddress(), accident.getText(), accident.getType())) != null;
+    }
 }
