@@ -33,13 +33,13 @@ public class AccidentController {
                        HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
         accidents.create(accident, typeId, ids);
-        return "redirect:/#";
+        return "redirect:/";
     }
 
     @PostMapping("/updateAccident")
     public String update(@ModelAttribute Accident accident, @RequestParam(value = "type.id") int typeId) {
         accidents.update(accident, typeId);
-        return "redirect:/#";
+        return "redirect:/";
     }
 
     @GetMapping("/editAccident/{id}")
