@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Rule;
 import ru.job4j.accidents.repository.RuleMem;
 
-import java.util.List;
+import java.util.Collection;
 
 @Service
 @AllArgsConstructor
@@ -13,7 +13,7 @@ public class RuleService {
 
     private RuleMem ruleMem;
 
-    public List<Rule> findAll() {
+    public Collection<Rule> findAll() {
         return ruleMem.findAll();
     }
 }

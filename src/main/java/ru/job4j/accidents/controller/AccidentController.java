@@ -32,7 +32,7 @@ public class AccidentController {
                        @RequestParam(value = "type.id") int typeId,
                        HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
-        accidents.create(accident, typeId);
+        accidents.create(accident, typeId, ids);
         return "redirect:/#";
     }
 
