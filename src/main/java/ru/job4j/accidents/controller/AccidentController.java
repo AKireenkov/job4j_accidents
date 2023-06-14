@@ -21,8 +21,8 @@ public class AccidentController {
 
     @GetMapping("/createAccident")
     public String viewCreateAccident(Model model) {
-        model.addAttribute("rules", ruleService.findAllRules());
-        model.addAttribute("types", typeService.findAllTypes());
+        model.addAttribute("rules", ruleService.findAll());
+        model.addAttribute("types", typeService.findAll());
         model.addAttribute("user", "Andrey Kireenkov");
         return "createAccident";
     }
@@ -50,7 +50,7 @@ public class AccidentController {
             return "errors/404";
         }
         model.addAttribute("accident", accident.get());
-        model.addAttribute("types", typeService.findAllTypes());
+        model.addAttribute("types", typeService.findAll());
         model.addAttribute("user", "Andrey Kireenkov");
         return "editAccident";
     }

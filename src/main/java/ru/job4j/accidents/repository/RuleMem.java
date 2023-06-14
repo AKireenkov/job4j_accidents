@@ -14,7 +14,7 @@ public class RuleMem {
             new Rule(3, "Статья. 3")
     );
 
-    public List<Rule> findAllRules() {
+    public List<Rule> findAll() {
         return rules;
     }
 }

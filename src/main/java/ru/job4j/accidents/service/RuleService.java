@@ -13,7 +13,7 @@ public class RuleService {
 
     private RuleMem ruleMem;
 
-    public List<Rule> findAllRules() {
-        return ruleMem.findAllRules();
+    public List<Rule> findAll() {
+        return ruleMem.findAll();
     }
 }
