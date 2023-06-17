@@ -1,0 +1,1 @@
+ALTER TABLE accidents ADD COLUMN rule_id int REFERENCES rules(id);
