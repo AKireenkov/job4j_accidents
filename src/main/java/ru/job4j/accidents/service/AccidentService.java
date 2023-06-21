@@ -14,16 +14,16 @@ import java.util.*;
 @AllArgsConstructor
 public class AccidentService {
 
-    private final AccidentHibernate accidentsRepostiory;
+    private final AccidentHibernate accidentsRepository;
     private final TypeHibernate typeRepository;
     private final RuleHibernate ruleRepository;
 
     public Collection<Accident> findAll() {
-        return accidentsRepostiory.getAll();
+        return accidentsRepository.getAll();
     }
 
     public Optional<Accident> findById(int id) {
-        return accidentsRepostiory.findById(id);
+        return accidentsRepository.findById(id);
     }
 
     public void create(Accident accident, int typeId, String[] ids) {
@@ -35,11 +35,11 @@ public class AccidentService {
                                 ruleRepository.findById(Integer.parseInt(id)).get()
                         ));
         accident.setRules(rules);
-        accidentsRepostiory.save(accident);
+        accidentsRepository.save(accident);
     }
 
-    public boolean update(Accident accident, int typeId) {
+    public void update(Accident accident, int typeId) {
         accident.setType(typeRepository.findById(typeId).get());
-        return accidentsRepostiory.update(accident);
+        accidentsRepository.update(accident);
     }
 }

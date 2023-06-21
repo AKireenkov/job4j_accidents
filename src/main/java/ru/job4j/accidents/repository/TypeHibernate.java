@@ -1,39 +1,30 @@
 package ru.job4j.accidents.repository;
 
 import lombok.AllArgsConstructor;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.AccidentType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
 public class TypeHibernate {
-    private final SessionFactory sf;
+
+    private final CrudRepository crudRepository;
 
     public Collection<AccidentType> findAll() {
-        try (Session session = sf.openSession()) {
-            return session.createQuery("FROM Type", AccidentType.class)
-                    .list();
-        }
+        return crudRepository.query("FROM Type", AccidentType.class);
     }
 
     public Optional<AccidentType> findById(int id) {
-        try (Session session = sf.openSession()) {
-            return session.createQuery("""
-                            FROM Type
-                            WHERE id = :id
-                            """, AccidentType.class)
-                    .setParameter("id", id)
-                    .uniqueResultOptional();
-        }
+        return crudRepository.optional("FROM Type WHERE id = :id",
+                AccidentType.class,
+                Map.of("id", id));
     }
-
 
     public AccidentType setType(ResultSet rs) throws SQLException {
         AccidentType type = new AccidentType();
