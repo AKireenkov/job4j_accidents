@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.Rule;
-import ru.job4j.accidents.repository.AccidentHibernate;
-import ru.job4j.accidents.repository.RuleHibernate;
-import ru.job4j.accidents.repository.TypeHibernate;
+import ru.job4j.accidents.repository.AccidentRepository;
+import ru.job4j.accidents.repository.RuleRepository;
+import ru.job4j.accidents.repository.TypeRepository;
 
 import java.util.*;
 
@@ -14,12 +14,14 @@ import java.util.*;
 @AllArgsConstructor
 public class AccidentService {
 
-    private final AccidentHibernate accidentsRepository;
-    private final TypeHibernate typeRepository;
-    private final RuleHibernate ruleRepository;
+    private final AccidentRepository accidentsRepository;
+    private final TypeRepository typeRepository;
+    private final RuleRepository ruleRepository;
 
     public Collection<Accident> findAll() {
-        return accidentsRepository.getAll();
+        List<Accident> accidents = new ArrayList<>();
+        accidentsRepository.findAll().forEach(accidents::add);
+        return accidents;
     }
 
     public Optional<Accident> findById(int id) {
@@ -40,6 +42,7 @@ public class AccidentService {
 
     public void update(Accident accident, int typeId) {
         accident.setType(typeRepository.findById(typeId).get());
-        accidentsRepository.update(accident);
+        accidentsRepository.deleteById(typeId);
+        accidentsRepository.save(accident);
     }
 }
