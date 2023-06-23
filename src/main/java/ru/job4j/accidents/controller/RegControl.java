@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.accidents.model.User;
-import ru.job4j.accidents.repository.AuthorityRepository;
-import ru.job4j.accidents.repository.UserRepository;
+import ru.job4j.accidents.service.AuthorityService;
+import ru.job4j.accidents.service.UserService;
 
 @AllArgsConstructor
 @Controller
 public class RegControl {
 
     private final PasswordEncoder encoder;
-    private final UserRepository users;
-    private final AuthorityRepository authorities;
+    private final UserService users;
+    private final AuthorityService authorities;
 
     @PostMapping("/reg")
     public String regSave(@ModelAttribute User user,
@@ -25,11 +25,9 @@ public class RegControl {
         user.setEnabled(true);
         user.setPassword(encoder.encode(user.getPassword()));
         user.setAuthority(authorities.findByAuthority("ROLE_USER"));
-        try {
-            users.save(user);
-        } catch (Exception ex) {
+        var result = users.save(user);
+        if ("reg".equals(result)) {
             model.addAttribute("errorMessage", "Username already exists !!");
-            return "reg";
         }
         return "redirect:/login";
     }
