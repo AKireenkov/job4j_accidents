@@ -19,9 +19,7 @@ public class AccidentService {
     private final RuleRepository ruleRepository;
 
     public Collection<Accident> findAll() {
-        List<Accident> accidents = new ArrayList<>();
-        accidentsRepository.findAll().forEach(accidents::add);
-        return accidents;
+        return accidentsRepository.findAllAccidents();
     }
 
     public Optional<Accident> findById(int id) {
