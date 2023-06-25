@@ -14,6 +14,6 @@ public class TypeService {
     private final TypeRepository typeRepository;
 
     public Collection<AccidentType> findAll() {
-        return typeRepository.findAllTypes();
+        return typeRepository.findAll();
     }
 }

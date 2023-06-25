@@ -19,7 +19,7 @@ public class AccidentService {
     private final RuleRepository ruleRepository;
 
     public Collection<Accident> findAll() {
-        return accidentsRepository.findAllAccidents();
+        return accidentsRepository.findAll();
     }
 
     public Optional<Accident> findById(int id) {
