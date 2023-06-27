@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -23,8 +24,18 @@ public class Accident {
     private String name;
     private String text;
     private String address;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_id")
     private AccidentType type;
-    private Set<Rule> rules;
+
+    @ManyToMany
+    @JoinTable(
+            name = "accidents_and_rules",
+            joinColumns = {@JoinColumn(name = "accident_id")},
+            inverseJoinColumns = {@JoinColumn(name = "rule_id")}
+    )
+    private Set<Rule> rules = new HashSet<>();
 
     public void addRule(Rule rule) {
         rules.add(rule);
