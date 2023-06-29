@@ -18,12 +18,12 @@
 </head>
 <body>
 <div class="container py-3">
-    <main class="form-signin">
-        <h1 class="h3 mb-3 fw-normal">Авторизация</h1>
+    <main class="form-reg">
+        <h1 class="h3 mb-3 fw-normal">Регистрация</h1>
         <div th:if="${not #lists.isEmpty(errorMessage)}" class="alert alert-danger" role="alert">
             <span th:text="${errorMessage}"></span>
         </div>
-        <form th:action="@{/login}" method="post">
+        <form name='login' th:action="@{/reg}" method='POST'>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="username" name="username">
@@ -34,11 +34,11 @@
                 <label for="password">Password</label>
             </div>
             <hr class="my-4">
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Авторизация</button>
-            <div class="col-6">
-                <a class="nav-item nav-link" th:href="@{/reg}">Регистрация</a>
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Регистрация</button>
+            <div class="col-10">
+                <a class="row-10 nav-item nav-link" th:href="@{/login}">Авторизация</a>
             </div>
         </form>
     </main>
-</div>
+</body>
 </html>
