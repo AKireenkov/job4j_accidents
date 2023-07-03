@@ -25,8 +25,8 @@ public class RegControl {
         user.setEnabled(true);
         user.setPassword(encoder.encode(user.getPassword()));
         user.setAuthority(authorities.findByAuthority("ROLE_USER"));
-        var result = users.save(user);
-        if ("reg".equals(result)) {
+        var saved = users.save(user);
+        if (saved.isEmpty()) {
             model.addAttribute("errorMessage", "Username already exists !!");
         }
         return "redirect:/login";
