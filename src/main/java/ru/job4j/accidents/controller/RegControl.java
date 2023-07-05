@@ -28,6 +28,7 @@ public class RegControl {
         var saved = users.save(user);
         if (saved.isEmpty()) {
             model.addAttribute("errorMessage", "Username already exists !!");
+            return "reg";
         }
         return "redirect:/login";
     }
